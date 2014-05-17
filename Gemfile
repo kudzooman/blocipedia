@@ -49,6 +49,18 @@ gem 'bootstrap-sass', '~> 3.1.1'
 # Figaro
 gem 'figaro'
 
+# Redcarpet
+gem 'redcarpet'
+
+# Friendly ID - for more readable URLs
+gem 'friendly_id', '~> 5.0.0'
+
+# Pundit
+gem 'pundit'
+
+# Faker
+gem 'faker'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513004119) do
+ActiveRecord::Schema.define(version: 20140517182101) do
+
+  create_table "collaborators", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.boolean  "access"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "user_name"
@@ -35,5 +43,15 @@ ActiveRecord::Schema.define(version: 20140513004119) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "wikis", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "wikis", ["user_id"], name: "index_wikis_on_user_id"
 
 end
