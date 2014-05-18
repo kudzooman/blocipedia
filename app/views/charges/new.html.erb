@@ -1,9 +1,5 @@
 <%= form_tag charges_path do %>
-  <!-- The form doesn't pass the amount to the create action, -->
-  <!-- so we have to pass it manually. n-->
-  <%= hidden_field_tag :amount, @stripe_btn_hash[:data][:amount] %>
-<% end %>
-
-
+  <%= hidden_field_tag :amount, 1200 %>
   <h4>Click the button!</h4>
-  <script><%= @stripe_btn_hash %></script>
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="<%= Rails.configuration.stripe[:publishable_key] %>" data-description="Premium Wiki ($12)" data-amount="1200"></script>
+<% end %>
