@@ -1,15 +1,31 @@
-<h1><u>My Wikis</u></h1>
-<% policy_scope(@wikis).each do |wiki| %>
-  <h5>
-    <%= link_to wiki.title, wiki %> </br>
-  </h5>
-  <%= link_to "Edit", edit_wiki_path(wiki), class: 'btn btn-success' %>
+<div class='container-fluid'>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <center><h1>My Wikis</h1></center>
+    </div>
+  </div>
 
-  <%= link_to  "Delete", [wiki], method: :delete, data: { confirm: 'Are you sure you want to delete this item?'}, class: 'btn btn-primary btn' %>
-<% end %>
+  <div class='container-fluid outside-border'>
 
-</br>
-</br>
-</br>
+    <% policy_scope(@wikis).each do |wiki| %>
+      <div class='row bordered'>
+        <div class='col-md-8'>
+          <h5>
+            <%= link_to wiki.title, wiki %> </br>
+          </h5>
+        </div>
+        <div class='col-md-2'>
+          <%= link_to "Edit", edit_wiki_path(wiki), class: 'btn btn-success' %>
+        </div>
+        <div class='col-md-2'>
+          <%= link_to  "Delete", [wiki], method: :delete, data: { confirm: 'Are you sure you want to delete this item?'}, class: 'btn btn-primary btn' %>
+        </div>
+      </div>
+    <% end %>
 
-<%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
+  </div>
+
+    </br>
+    <center><%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success btn-large' %></center>
+
+</div>

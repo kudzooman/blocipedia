@@ -5,9 +5,20 @@
   </div>
   <div class="form-group">
     <%= f.label :body %>
-    <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
+    <%= f.hidden_field :body, id: 'body' %>
+    <div id="epiceditor"></div>
   </div>
+
   <div class="form-group">
-    <%= f.submit "Save", class: 'btn btn-success' %>
+    <%= f.submit "Save", class: 'btn btn-success', onclick: "prep()" %>
   </div>
 <% end %>
+
+<script src="epiceditor.min.js"></script>
+<script>
+  var editor = new EpicEditor().load();
+
+  function prep() {
+    alert(editor.getElement('editor').body.innerHTML);
+  }
+</script>
