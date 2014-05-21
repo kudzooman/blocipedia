@@ -1,5 +1,5 @@
 class WikisController < ApplicationController
-  respond_to :html
+  respond_to :html, :js
 
   def index
     @wikis = policy_scope(Wiki)       
@@ -15,6 +15,8 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+   # @users = User.all
+    # @users = @users without current_user and wiki owner
   end
 
   def update

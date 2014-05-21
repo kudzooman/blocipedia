@@ -5,7 +5,7 @@
   </div>
   <div class="form-group">
     <%= f.label :body %>
-    <%= f.hidden_field :body, id: 'body' %>
+    <%= f.hidden_field :body, id: "body" %>
     <div id="epiceditor"></div>
   </div>
 
@@ -14,11 +14,14 @@
   </div>
 <% end %>
 
+
+<!-- Grab all your users  show the collaborators new collaborator form for each user, also give them a delete button-->
+
 <script src="epiceditor.min.js"></script>
 <script>
   var editor = new EpicEditor().load();
 
   function prep() {
-    alert(editor.getElement('editor').body.innerHTML);
+    $("#body")[0].value = (editor.getElement('editor').body.innerHTML);
   }
 </script>

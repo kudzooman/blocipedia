@@ -20,7 +20,20 @@ attr_reader :user, :wiki
     end
 
     def resolve
-      scope.where(:user_id => user.id)
+      if user.role == :admin
+        scope.all
+      elsif user.role == :premium
+        all = scope.all
+        res = []
+        all.each do |s|
+          if s.public? || s.user == user || s.users.include? :user
+            res << s
+          end
+        end
+        res
+      else
+        # mortal users
+      end
     end
   end
 end
