@@ -6,11 +6,4 @@ class Wiki < ActiveRecord::Base
 
   belongs_to :user
 
-  def public?
-    self.where(public: true)
-  end
-  
-  # wiki.users => collorators
-  # wiki.user => owner/creator
-
 end

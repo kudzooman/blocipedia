@@ -1,4 +1,4 @@
-class WikiPolicy 
+class WikiPolicy
 attr_reader :user, :wiki
 
   def initialize(user, wiki)
@@ -35,9 +35,11 @@ attr_reader :user, :wiki
         all = scope.all
         wikis = []
         all.each do |wiki|
-          if wiki.public? || wiki.users.include? :user
+          if wiki.public? || wiki.users.include?(:user)
             wikis << wiki
           end
+        end
+        wikis
       end
     end
   end
