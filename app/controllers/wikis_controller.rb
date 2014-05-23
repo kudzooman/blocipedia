@@ -2,16 +2,16 @@ class WikisController < ApplicationController
   respond_to :html, :js
 
   def index
-    @wikis = Wiki.all      
+    @wikis = policy_scope(Wiki)
   end
 
   def show
-    @wiki = Wiki.find(params[:id])  
+    @wiki = Wiki.find(params[:id])
   end
 
   def new
-    @wiki = Wiki.new 
-    @users = User.all   
+    @wiki = Wiki.new
+    @users = User.all
   end
 
   def edit
@@ -22,8 +22,8 @@ class WikisController < ApplicationController
   end
 
   def update
-     @wiki = Wiki.find(params[:id])    
-    if @wiki.update_attributes(params.require(:wiki).permit(:title, :body))
+     @wiki = Wiki.find(params[:id])
+    if @wiki.update_attributes(wiki_params)
       flash[:notice] = "Wiki was updated."
       redirect_to @wiki
     else
@@ -34,7 +34,7 @@ class WikisController < ApplicationController
 
 
   def destroy
-    @wiki = Wiki.find(params[:id])    
+    @wiki = Wiki.find(params[:id])
 
     if @wiki.destroy
       flash[:notice] = "Wiki was removed."
@@ -49,7 +49,7 @@ class WikisController < ApplicationController
 
   def create
     @wiki = current_user.wikis.build(wiki_params)
-    
+
     if @wiki.save
       redirect_to @wiki, notice: "Wiki was saved successfully."
     else
