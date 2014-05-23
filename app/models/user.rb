@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
 
   has_many :wikis, through: :collaborators
 
+  def role?(base_role)
+    role == base_role.to_s
+  end
+
   #has_many :collaborators
   #has_many :wikis through: :collaborators
   # wikis => wikis this user is a colloaborotr on

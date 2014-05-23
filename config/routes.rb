@@ -4,7 +4,9 @@ Blocipedia::Application.routes.draw do
 
   devise_for :users
   
-  resources :wikis 
+  resources :wikis do
+    resources :collaborators, only: [:new, :create]
+  end 
    # nested route for collaborators, only need create, destroy
 
   get 'about' => 'welcome#about'

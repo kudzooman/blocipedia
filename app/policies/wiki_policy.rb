@@ -15,8 +15,8 @@ attr_reader :user, :wiki
     attr_reader :user, :scope
 
     def initialize(user, scope)
-    @user = user
-    @scope = scope
+      @user = user
+      @scope = scope
     end
 
     def resolve
@@ -24,15 +24,20 @@ attr_reader :user, :wiki
         scope.all
       elsif user.role == :premium
         all = scope.all
-        res = []
-        all.each do |s|
-          if s.public? || s.user == user || s.users.include? :user
-            res << s
+        wikis = []
+        all.each do |wiki|
+          if wiki.public? || wiki.user == user || wiki.users.include?(:user)
+            wikis << wiki
           end
         end
-        res
+        wikis
       else
-        # mortal users
+        all = scope.all
+        wikis = []
+        all.each do |wiki|
+          if wiki.public? || wiki.users.include? :user
+            wikis << wiki
+          end
       end
     end
   end
