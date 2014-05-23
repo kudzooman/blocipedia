@@ -20,13 +20,13 @@ attr_reader :user, :wiki
     end
 
     def resolve
-      if user.role == :admin
+      if user.role?(:admin)
         scope.all
-      elsif user.role == :premium
+      elsif user.role?(:premium)
         all = scope.all
         wikis = []
         all.each do |wiki|
-          if wiki.public? || wiki.user == user || wiki.users.include?(:user)
+          if wiki.public? || wiki.user == user || wiki.users.include?(user)
             wikis << wiki
           end
         end
@@ -35,7 +35,7 @@ attr_reader :user, :wiki
         all = scope.all
         wikis = []
         all.each do |wiki|
-          if wiki.public? || wiki.users.include?(:user)
+          if wiki.public? || wiki.users.include?(user)
             wikis << wiki
           end
         end

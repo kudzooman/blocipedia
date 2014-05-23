@@ -15,7 +15,7 @@ class ChargesController < ApplicationController
     currency: 'usd'
     )
 
-    current_user.update_attribute(:role, :premium)
+    current_user.update_attribute(:role, "premium")
 
     redirect_to wikis_path, flash: { notice: "Thanks for your payment, #{current_user.user_name}!" }
 

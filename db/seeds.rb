@@ -31,7 +31,7 @@ admin = User.new(
   user_name: 'admin',
   email:     'admin@example.com',
   password:  'helloworld',
-  role:      'admin'
+  role:      :admin
 )
 admin.skip_confirmation!
 admin.save
@@ -40,7 +40,7 @@ premium = User.new(
   user_name: 'premium',
   email:     'premium@example.com',
   password:  'helloworld',
-  role:      'premium'
+  role:      :premium
 )
 premium.skip_confirmation!
 premium.save
