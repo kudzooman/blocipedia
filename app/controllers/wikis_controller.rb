@@ -12,13 +12,15 @@ class WikisController < ApplicationController
   def new
     @wiki = Wiki.new
     @users = User.all
+    @collaborator = Collaborator.new
   end
 
   def edit
     @wiki = Wiki.find(params[:id])
     @users = User.all
+    @users.delete(current_user)
+    @users.delete(@wiki.user)
     @collaborator = Collaborator.new
-    # @users = @users without current_user and wiki owner
   end
 
   def update
@@ -48,9 +50,10 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = current_user.wikis.build(wiki_params)
+     @wiki = Wiki.new(wiki_params)
+     @wiki.user = current_user
 
-    if @wiki.save
+    if @wiki.save!
       redirect_to @wiki, notice: "Wiki was saved successfully."
     else
       flash[:error] = "Error creating wiki. Please try again."

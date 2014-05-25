@@ -1,52 +1,32 @@
-<div class="col-md-8">
-    <%= form_for @wiki do |f| %>
-      <div class="form-group">
-        <%= f.label :title %>
-        <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
-      </div>
+ <%= form_for @wiki do |f| %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
+  </div>
   <div class="form-group">
     <%= f.label :body %>
     <%= f.hidden_field :body, id: "body" %>
     <div id="epiceditor"></div>
   </div>
-      <div class="form-group">
+  <div class="form-group">
      <% if current_user.role?(:admin) || current_user.role?(:premium) %>
       <%= f.label :public, class: 'checkbox' do %>
           <%= f.check_box :public %> Public wiki
         <% end %>
      <% end %>
-      </div>
-      <div class="form-group">
-        <%= f.submit "Save", class: 'btn btn-success' %>
-      </div>
-    <% end %>
+  </div>
+  <div class="form-group">
+        <%= f.submit "Save", class: 'btn btn-success', onclick: "prep()" %>
+  </div>
+<% end %>
 
 <script src="epiceditor.min.js"></script>
 <script>
   var editor = new EpicEditor().load();
+  editor.getElement('editor').body.innerHTML = "";
 
   function prep() {
     $("#body")[0].value = (editor.getElement('editor').body.innerHTML);
   }
 </script>
-
-
-<% if current_user.role?(:admin) || current_user.role?(:premium) %>
-  <% @users.each do |user| %>
-    <div class='row bordered'>
-      <div class='col-md-8'>
-        <%= user.email %>
-      </div>
-            
-      <div class='col-md-2'>
-       Add
-      
-      </div>
-      <div class='col-md-2'>
-       Remove
-      </div>
-    </div>
-  <% end %>
-<% end %>
-
 

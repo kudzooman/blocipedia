@@ -23,7 +23,9 @@ class ApplicationPolicy
   end
 
   def update?
-    user.present?
+    puts record
+    puts user
+    user.present? && (user.role?(:admin) || record.user == user)
   end
 
   def edit?
@@ -31,7 +33,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    user.present?
+    user.present? && (user.role?(:admin) || record.user == user)
   end
 
   def scope
