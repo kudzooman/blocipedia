@@ -155,7 +155,7 @@ DEPENDENCIES
   epic-editor-rails
   faker
   figaro
-  friendly_id (~> 5.0.0)
+  friendly_id
   jbuilder (~> 1.2)
   jquery-rails
   pg

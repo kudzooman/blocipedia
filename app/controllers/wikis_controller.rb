@@ -6,7 +6,10 @@ class WikisController < ApplicationController
   end
 
   def show
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
+    if request.path != wiki_path(@wiki)
+      redirect_to @wiki, status: :moved_permanently
+    end
   end
 
   def new
@@ -16,15 +19,13 @@ class WikisController < ApplicationController
   end
 
   def edit
-    @wiki = Wiki.find(params[:id])
-    @users = User.all
-    @users.delete(current_user)
-    @users.delete(@wiki.user)
+    @wiki = Wiki.friendly.find(params[:id])
+    @users = User.all - [current_user, @wiki.user]
     @collaborator = Collaborator.new
   end
 
   def update
-     @wiki = Wiki.find(params[:id])
+     @wiki = Wiki.friendly.find(params[:id])
     if @wiki.update_attributes(wiki_params)
       flash[:notice] = "Wiki was updated."
       redirect_to @wiki
@@ -36,7 +37,7 @@ class WikisController < ApplicationController
 
 
   def destroy
-    @wiki = Wiki.find(params[:id])
+    @wiki = Wiki.friendly.find(params[:id])
 
     if @wiki.destroy
       flash[:notice] = "Wiki was removed."

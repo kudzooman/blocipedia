@@ -15,7 +15,7 @@ class CollaboratorsController < ApplicationController
     end
 
     respond_with(@collaborator) do |f|
-      f.html { redirect_to [@wiki] }
+      f.html { redirect_to edit_wiki_path(@wiki) }
     end
   end
 
@@ -34,7 +34,7 @@ class CollaboratorsController < ApplicationController
     end
 
     respond_with(@collaborator) do |f|
-      f.html { redirect_to [@wiki] }
+      f.html { redirect_to edit_wiki_path(@wiki) }
     end
   end
 

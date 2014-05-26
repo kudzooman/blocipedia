@@ -23,8 +23,6 @@ class ApplicationPolicy
   end
 
   def update?
-    puts record
-    puts user
     user.present? && (user.role?(:admin) || record.user == user)
   end
 

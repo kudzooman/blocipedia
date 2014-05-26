@@ -53,7 +53,7 @@ gem 'figaro'
 gem 'redcarpet'
 
 # Friendly ID - for more readable URLs
-gem 'friendly_id', '~> 5.0.0'
+gem 'friendly_id'
 
 # Pundit
 gem 'pundit'
